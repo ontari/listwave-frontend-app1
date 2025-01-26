@@ -8,20 +8,19 @@ import { MaterialModule } from './material.module';
 import { HttpClientModule } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
 import { ReactiveFormsModule } from '@angular/forms';
-import { EditDialogComponent } from "./components/edit-dialog/edit-dialog.component";
+
 
 
 
 @Component({
   selector: 'app-root',
   imports: [
-    RouterOutlet,
+    //RouterOutlet,
     MaterialModule,
     HttpClientModule,
     FormsModule,
     ReactiveFormsModule,
     DataTableComponent,
-    EditDialogComponent
 ],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss'

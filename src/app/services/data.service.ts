@@ -1,6 +1,9 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import { Observable, forkJoin } from 'rxjs';
+import { map } from 'rxjs/operators';
+
+import { Task } from '../model/task';
 
 @Injectable({
   providedIn: 'root',
@@ -10,19 +13,33 @@ export class DataService {
 
   constructor(private http: HttpClient) {}
 
-  getData(): Observable<any[]> {
-    return this.http.get<any[]>(this.apiUrl);
+  getTasks(): Observable<Task[]> {
+    return this.http
+      .get(this.apiUrl)
+      //      .get<Task[]>(this.apiUrl)
+      .pipe<Task[]>(map((data:any) => data))
+      ;
   }
 
-  createData(record: any): Observable<any> {
-    return this.http.post(this.apiUrl, record);
+  createTask(task: Task): Observable<Task> {
+    return this.http.post<Task>(this.apiUrl, task);
   }
 
-  updateData(id: number, record: any): Observable<any> {
-    return this.http.put(`${this.apiUrl}/${id}`, record);
+  updateTask(task: Task): Observable<Task> {
+    return this.http.put<Task>(`${this.apiUrl}/${task.id}`, task);
   }
 
-  deleteData(id: number): Observable<any> {
-    return this.http.delete(`${this.apiUrl}/${id}`);
+  deleteTask(id: number): Observable<Task> {
+    return this.http.delete<Task>(`${this.apiUrl}/${id}`);
   }
+
+  deleteUsers(tasks: Task[]): Observable<Task[]> {
+    return forkJoin(
+      tasks.map((tasks) =>
+        this.http.delete<Task>(`${this.apiUrl}/${tasks.id}`)
+      )
+    );
+  }
+
+
 }
