@@ -1,32 +1,63 @@
+<p>table comp</p>
+
 <mat-toolbar>
-    <span>Data Table</span>
-    <button mat-raised-button color="primary" (click)="addRecord()">Add Record</button>
+  <span>Data Table</span>
+  <!-- <button mat-raised-button color="primary" (click)="addRecord()">Add Record</button> -->
 </mat-toolbar>
-  
-  <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
-    <ng-container matColumnDef="id">
-      <th mat-header-cell *matHeaderCellDef>ID</th>
-      <td mat-cell *matCellDef="let element">{{ element.id }}</td>
-    </ng-container>
-  
-    <ng-container matColumnDef="description">
-      <th mat-header-cell *matHeaderCellDef>Description</th>
-      <td mat-cell *matCellDef="let element">{{ element.description }}</td>
-    </ng-container>
-  
-    <ng-container matColumnDef="status">
-      <th mat-header-cell *matHeaderCellDef>Status</th>
-      <td mat-cell *matCellDef="let element">
-        <button mat-icon-button color="primary" (click)="editRecord(element)">
+
+<!-- <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+  <ng-container matColumnDef="id">
+    <th mat-header-cell *matHeaderCellDef>ID</th>
+    <td mat-cell *matCellDef="let element">{{ element.id }}</td>
+  </ng-container>
+
+  <ng-container matColumnDef="description">
+    <th mat-header-cell *matHeaderCellDef>Description</th>
+    <td mat-cell *matCellDef="let element">{{ element.description }}</td>
+  </ng-container>
+
+  <ng-container matColumnDef="status">
+    <th mat-header-cell *matHeaderCellDef>Status</th>
+    <td mat-cell *matCellDef="let element">{{element.status}}</td>
+  </ng-container>
+
+  <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+  <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+</table> -->
+
+
+<!--           <button mat-icon-button color="primary" (click)="onEditClick(element)">
           <mat-icon>edit</mat-icon>
         </button>
-        <button mat-icon-button color="warn" (click)="deleteRecord(element.id)">
+        <button mat-icon-button color="warn" (click)="onDeleteClick(element.id)">
           <mat-icon>delete</mat-icon>
-        </button>
-      </td>
-    </ng-container>
-  
-    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
-  </table>
-  
+        </button>-->
+
+
+<table>
+
+  <tr>
+    <th>ID</th>
+    <th>Description</th>
+    <th>Status</th>
+    <th></th>
+    <th></th>
+  </tr>
+
+
+
+  <tr *ngFor="let post of dataSource;">
+    <td>{{post.id}}</td>
+    <td>{{post.description}}</td>
+    <td>{{post.status}}</td>
+    <td>
+      <button (click)="onEditClick(post)">Edit</button>
+    </td>
+    <td>
+      <button (click)="onDeleteClick(post)">Delete</button>
+    </td>
+
+  </tr>
+
+
+</table>
