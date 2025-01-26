@@ -6,6 +6,7 @@ import { DataTableComponent } from './components/data-table/data-table.component
 import { MaterialModule } from './material.module';
 
 import { HttpClientModule } from '@angular/common/http';
+import { FormsModule } from '@angular/forms';
 import { ReactiveFormsModule } from '@angular/forms';
 import { EditDialogComponent } from "./components/edit-dialog/edit-dialog.component";
 
@@ -17,6 +18,7 @@ import { EditDialogComponent } from "./components/edit-dialog/edit-dialog.compon
     RouterOutlet,
     MaterialModule,
     HttpClientModule,
+    FormsModule,
     ReactiveFormsModule,
     DataTableComponent,
     EditDialogComponent

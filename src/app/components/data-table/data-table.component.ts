@@ -1,5 +1,6 @@
 import { Component, inject, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { FormsModule } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { DataService } from '../../services/data.service';
@@ -18,7 +19,8 @@ import { MaterialModule } from '../../material.module';
     [
       MaterialModule,
       HttpClientModule,
-      CommonModule
+      CommonModule,
+      FormsModule
     ],
 })
 
@@ -27,10 +29,13 @@ import { MaterialModule } from '../../material.module';
 
 export class DataTableComponent implements OnInit {
 
+  apiUrl ='http://localhost:8080/ListWave-1.0/api/list';
   httpClient = inject(HttpClient);
   dataSource: any[] = [];
 
-  displayedColumns: string[] = ['id', 'description', 'status'];
+  newTask: any = {description: '', status:''};
+
+  displayedColumns: string[] = ['id', 'description', 'status',];
 
   ngOnInit(): void {
     this.fetchData();
@@ -38,11 +43,17 @@ export class DataTableComponent implements OnInit {
 
   fetchData(): void {
     this.httpClient
-      .get('http://localhost:8080/ListWave-1.0/api/list')
+      .get(this.apiUrl)
       .subscribe((data: any) => {
         console.log(data);
         this.dataSource = data;
       });
+  }
+
+
+  deleteRecord(id: number) {
+    this.httpClient.delete(this.apiUrl+`/${id}`)
+      .subscribe(() => this.fetchData());
   }
 
 
@@ -53,7 +64,8 @@ export class DataTableComponent implements OnInit {
 
   onDeleteClick(item: any): void {
     console.log('Button DEL clicked!');
-    alert('Button DEL was clicked!');
+    this.deleteRecord(item.id);
+    this.ngOnInit();
   }
 
 }

@@ -1,40 +1,12 @@
 <p>table comp</p>
 
 <mat-toolbar>
-  <span>Data Table</span>
+  <span>ListWave: ToDO List</span>
   <!-- <button mat-raised-button color="primary" (click)="addRecord()">Add Record</button> -->
 </mat-toolbar>
 
-<!-- <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
-  <ng-container matColumnDef="id">
-    <th mat-header-cell *matHeaderCellDef>ID</th>
-    <td mat-cell *matCellDef="let element">{{ element.id }}</td>
-  </ng-container>
 
-  <ng-container matColumnDef="description">
-    <th mat-header-cell *matHeaderCellDef>Description</th>
-    <td mat-cell *matCellDef="let element">{{ element.description }}</td>
-  </ng-container>
-
-  <ng-container matColumnDef="status">
-    <th mat-header-cell *matHeaderCellDef>Status</th>
-    <td mat-cell *matCellDef="let element">{{element.status}}</td>
-  </ng-container>
-
-  <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-  <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
-</table> -->
-
-
-<!--           <button mat-icon-button color="primary" (click)="onEditClick(element)">
-          <mat-icon>edit</mat-icon>
-        </button>
-        <button mat-icon-button color="warn" (click)="onDeleteClick(element.id)">
-          <mat-icon>delete</mat-icon>
-        </button>-->
-
-
-<table>
+<table class="table table-striped">
 
   <tr>
     <th>ID</th>
@@ -51,10 +23,14 @@
     <td>{{post.description}}</td>
     <td>{{post.status}}</td>
     <td>
-      <button (click)="onEditClick(post)">Edit</button>
+      <button mat-icon-button color="primary" (click)="onEditClick(post)">
+        <mat-icon>edit</mat-icon>
+      </button>
     </td>
     <td>
-      <button (click)="onDeleteClick(post)">Delete</button>
+      <button mat-icon-button color="warn" (click)="onDeleteClick(post)">
+        <mat-icon>delete</mat-icon>
+      </button>
     </td>
 
   </tr>
