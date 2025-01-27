@@ -44,3 +44,55 @@ p {
     padding-right: 5px;
   }
   
+
+  //----------- toolbar
+
+  
+
+
+.sticky-toolbar {
+  position: sticky;
+  top: 0;
+  z-index: 1000; /* Ensures it stays on top of other elements */
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2); /* Optional: Adds shadow for better visibility */
+}
+
+.logo-container {
+  display: flex;
+  align-items: center;
+}
+
+.app-logo {
+  height: 40px;
+  width: 40px;
+  margin-right: 8px;
+}
+
+.app-name {
+  font-family: "Bebas Neue", serif;  
+  font-optical-sizing: auto;
+  font-weight: 20 px;
+  font-style: normal;
+}
+
+.spacer {
+  flex: 1;
+}
+
+.content {
+  padding: 16px;
+  font-size: 16px;
+  line-height: 1.5;
+}
+
+
+.toolbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 16px;
+}
+
+
+
+

@@ -1,15 +1,20 @@
 
 
-
-<h1>ListWave App: Manage your Tasks</h1>
-
-
-<article class="table-header">
+<mat-toolbar class="sticky-toolbar">
+  <div class="logo-container">
+    <img src="assets/logo.png" alt="Logo" class="app-logo" />
+    <span class="app-name">ListWave</span>
+  </div>
+  <span class="spacer"></span>
+  
+  <article class="table-header">
     <button class="button-remove-rows" mat-button (click)="removeSelectedRows()">
       Remove Rows
     </button>
     <button class="button-add-row" mat-button (click)="addRow()">Add Row</button>
   </article>
+  
+  </mat-toolbar>
 
 
 
