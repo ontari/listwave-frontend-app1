@@ -2,7 +2,6 @@
 
 <mat-toolbar>
   <span>ListWave: ToDO List</span>
-  <!-- <button mat-raised-button color="primary" (click)="addRecord()">Add Record</button> -->
 </mat-toolbar>
 
 
@@ -12,21 +11,13 @@
     <th>ID</th>
     <th>Description</th>
     <th>Status</th>
-    <th></th>
-    <th></th>
   </tr>
-
-
 
   <tr *ngFor="let post of dataSource2;">
     <td>{{post.id}}</td>
     <td>{{post.description}}</td>
     <td>{{post.status}}</td>
-    <td>
-      <button mat-icon-button color="primary" (click)="onEditClick(post)">
-        <mat-icon>edit</mat-icon>
-      </button>
-    </td>
+
     <td>
       <button mat-icon-button color="warn" (click)="onDeleteClick(post)">
         <mat-icon>delete</mat-icon>
@@ -42,10 +33,9 @@
 
 
 <article class="table-header">
-  <button class="button-remove-rows" mat-button (click)="removeSelectedRows()">
-    Remove Rows
-  </button>
+  <button class="button-remove-rows" mat-button (click)="removeSelectedRows()">Remove Rows</button>
   <button class="button-add-row" mat-button (click)="addRow()">Add Row</button>
+  <button class="button-refresh-table" mat-button (click)="refresh()">Refresh</button>
 </article>
 
 
@@ -107,3 +97,5 @@
   <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
   <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
 </table>
+
+

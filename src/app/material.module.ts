@@ -24,8 +24,8 @@ import { ReactiveFormsModule } from '@angular/forms';
     MatSnackBarModule,
     MatToolbarModule,
     ReactiveFormsModule,
-
     MatCheckboxModule,
+
   ],
 })
 export class MaterialModule {}

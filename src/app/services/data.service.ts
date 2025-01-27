@@ -16,30 +16,29 @@ export class DataService {
   getTasks(): Observable<Task[]> {
     return this.http
       .get(this.apiUrl)
-      //      .get<Task[]>(this.apiUrl)
       .pipe<Task[]>(map((data:any) => data))
       ;
-  }
+  }//ok
 
   createTask(task: Task): Observable<Task> {
     return this.http.post<Task>(this.apiUrl, task);
-  }
+  }//ok
 
   updateTask(task: Task): Observable<Task> {
-    return this.http.put<Task>(`${this.apiUrl}/${task.id}`, task);
-  }
+    return this.http.put<Task>(this.apiUrl+`/${task.id}`, task);
+  }//ok
 
   deleteTask(id: number): Observable<Task> {
     return this.http.delete<Task>(`${this.apiUrl}/${id}`);
-  }
+  }//ok
 
-  deleteUsers(tasks: Task[]): Observable<Task[]> {
+  deleteTasks(tasks: Task[]): Observable<Task[]> {
     return forkJoin(
       tasks.map((tasks) =>
         this.http.delete<Task>(`${this.apiUrl}/${tasks.id}`)
       )
     );
-  }
+  }//ok
 
 
 }

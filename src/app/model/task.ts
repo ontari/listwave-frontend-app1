@@ -14,11 +14,6 @@ export const TaskColumns = [
         label: '',
     },
     {
-        key: 'id',
-        type: '',
-        label: 'ID',
-    },
-    {
         key: 'description',
         type: 'text',
         label: 'Description',

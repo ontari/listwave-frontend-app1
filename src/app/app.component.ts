@@ -1,5 +1,4 @@
 import { Component } from '@angular/core';
-import { RouterOutlet } from '@angular/router';
 
 import { DataTableComponent } from './components/data-table/data-table.component';
 
@@ -11,16 +10,16 @@ import { ReactiveFormsModule } from '@angular/forms';
 
 
 
-
 @Component({
   selector: 'app-root',
+  standalone: true,
   imports: [
-    //RouterOutlet,
     MaterialModule,
     HttpClientModule,
     FormsModule,
     ReactiveFormsModule,
     DataTableComponent,
+
 ],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss'

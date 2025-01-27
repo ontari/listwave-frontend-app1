@@ -2,11 +2,13 @@ import { Component, inject, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
-import { MatSnackBar } from '@angular/material/snack-bar';
+//import { MatSnackBar } from '@angular/material/snack-bar';
 import { DataService } from '../../services/data.service';
-import { EditDialogComponent } from '../edit-dialog/edit-dialog.component';
 
 import { ConfirmDialogComponent } from '../../confirm-dialog/confirm-dialog.component';
+
+
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 
 import { HttpClient, HttpClientModule } from '@angular/common/http';
@@ -19,12 +21,13 @@ import { MatTableDataSource } from '@angular/material/table';
   selector: 'app-data-table',
   templateUrl: './data-table.component.html',
   styleUrls: ['./data-table.component.css'],
+  standalone: true,
   imports:
     [
       MaterialModule,
       HttpClientModule,
       CommonModule,
-      FormsModule
+      FormsModule,
     ],
 })
 
@@ -43,9 +46,9 @@ export class DataTableComponent implements OnInit {
 
   dataSource = new MatTableDataSource<Task>();
 
-  constructor(public dialog: MatDialog, private taskService: DataService) {}
+  constructor(public dialog: MatDialog, private taskService: DataService) { }
 
-  ngOnInit(): void {
+  ngOnInit(): void { //ok
 
     this.fetchData();
     this.taskService.getTasks().subscribe((res: any) => {
@@ -66,19 +69,37 @@ export class DataTableComponent implements OnInit {
 
   deleteRecord(id: number) {
     this.httpClient.delete(this.apiUrl + `/${id}`)
-      .subscribe(() => this.fetchData());
+      .subscribe((res: any) => {
+        this.dataSource.data = res;
+      });
+
+      this.ngOnInit();
   }
 
 
-  onEditClick(item: any): void {
-    console.log('Button Edit clicked!');
-    alert('Button EDIt was clicked!');
+  deleteSelectedRecords(tasks: Task[]) {
+
+    for (let task of tasks) {
+      this.deleteRecord(task.id)
+    }
+
+  }
+
+  updateRecord(item: any) {
+
+    this.httpClient.put(this.apiUrl + `/${item.id}`, item).subscribe(() => this.fetchData());
+  }
+
+
+  refresh(): void {
+    console.log('Button Refresh Table clicked!');
+    this.ngOnInit();
+    window.location.reload();
   }
 
   onDeleteClick(item: any): void {
     console.log('Button DEL clicked!');
     this.deleteRecord(item.id);
-    this.ngOnInit();
   }
 
 
@@ -89,11 +110,14 @@ export class DataTableComponent implements OnInit {
         row.isEdit = false;
       });
     } else {
+      console.log(row, 'editRow');
+      this.updateRecord(row);
       this.taskService.updateTask(row).subscribe(() => (row.isEdit = false));
     }
+
   }
 
-  addRow() {
+  addRow() { //ok
     const newRow: Task = {
       id: 0,
       description: '',
@@ -105,25 +129,23 @@ export class DataTableComponent implements OnInit {
   }
 
   removeRow(id: any) {
-    this.taskService.deleteTask(id).subscribe(() => {
-      this.dataSource.data = this.dataSource.data.filter(
-        (u: Task) => u.id !== id
-      );
-    });
+    this.httpClient.delete(this.apiUrl + `/${id}`)
+      .subscribe(() => {
+        this.dataSource.data = this.dataSource.data.filter(
+          (u: Task) => u.id !== id
+        );
+      });
+
   }
 
   removeSelectedRows() {
-    const users = this.dataSource.data.filter((u: Task) => u.isSelected);
+    const tasks = this.dataSource.data.filter((u: Task) => u.isSelected);
     this.dialog
       .open(ConfirmDialogComponent)
       .afterClosed()
       .subscribe((confirm) => {
         if (confirm) {
-          this.taskService.deleteUsers(users).subscribe(() => {
-            this.dataSource.data = this.dataSource.data.filter(
-              (u: Task) => !u.isSelected
-            );
-          });
+          this.deleteSelectedRecords(tasks);
         }
       });
   }
