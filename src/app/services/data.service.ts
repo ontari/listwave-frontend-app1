@@ -9,7 +9,7 @@ import { Task } from '../model/task';
   providedIn: 'root',
 })
 export class DataService {
-  private apiUrl = 'http://localhost:8080/ListWave-1.0/api/list/'; // API-Endpoint
+  private apiUrl = 'http://localhost:8080/ListWave-1.0/api/list'; // API-Endpoint
 
   constructor(private http: HttpClient) {}
 
