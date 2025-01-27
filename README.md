@@ -1,6 +1,25 @@
 # ListwaveFrontendApp
 
-This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 19.1.4.
+This project was generated using:
+* [Angular CLI](https://github.com/angular/angular-cli) version 19.1.4.
+* [Angular Material](https://material.angular.io/guide/getting-started) version 19.1.1.
+
+##### Requires the [ListWave Backend App](https://github.com/ontari/ListWave) from master-branch to be fully functional
+
+## Open new Terminal
+```bash
+//change Path to Project
+cd </path/to/project>
+```
+
+## Install Project Dependencies
+
+This command installs a package and any packages that it depends on.
+
+```bash
+npm install
+```
+
 
 ## Development server
 
@@ -9,6 +28,13 @@ To start a local development server, run:
 ```bash
 ng serve
 ```
+
+or 
+
+```bash
+npm start serve
+```
+
 
 Once the server is running, open your browser and navigate to `http://localhost:4200/`. The application will automatically reload whenever you modify any of the source files.
 
